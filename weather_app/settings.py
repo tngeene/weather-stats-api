@@ -19,8 +19,9 @@ PRODUCTION = env("PRODUCTION", cast=bool, default=False)
 ALLOWED_HOSTS = []
 
 # weather API configs
-WEATHER_API_BASE_URL = env("WEATHER_API_BASE_URL")
+BASE_WEATHER_API_URL = env("BASE_WEATHER_API_URL")
 WEATHER_API_KEY = env("WEATHER_API_KEY")
+
 
 # Application definition
 
@@ -32,8 +33,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
-    # dev installed apps
+    # 3rd party libraries
     "rest_framework",
+
+    # dev defined apps
+    'core',
     'users',
 ]
 
@@ -136,7 +140,6 @@ if not PRODUCTION:
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
