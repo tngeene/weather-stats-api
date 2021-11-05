@@ -1,3 +1,5 @@
+from statistics import mean
+
 import requests
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
@@ -16,21 +18,18 @@ class WeatherStatisticsAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
 
-        
-
-        if 'days' in request.GET.keys():
+        if "days" in request.GET.keys():
             days_to_lookup = int(request.GET.get("days"))
             # check whether days to look up lie between 1 and 10 days
             acceptable_range_of_days = range(1, 11)
             if days_to_lookup in acceptable_range_of_days:
                 city = kwargs.get("city")
-                forecast_data = self.get_city_forecast_stats(city, days_to_lookup)
-                return forecast_data
+                forecast_data_stats = self.get_city_forecast_stats(city, days_to_lookup)
+                return forecast_data_stats
             else:
                 raise NotAcceptable(
-                    _("Number of days to look up must lie between 1 to 10")
+                    _("Number of days to look up must be between 1 and 10")
                 )
-
         else:
             raise NotAcceptable(_("Provide number of days to look up forecast"))
 
@@ -41,12 +40,25 @@ class WeatherStatisticsAPIView(APIView):
 
         if response.status_code == 200:
             forecast_response = response.json()
-            forecast_lookup = forecast_response.get("forecast").get("forecastday")
+            forecast_lookup_list = forecast_response.get("forecast").get("forecastday")
+
+            # retrieve the 'day' key in the responses as this holds all information
+            forecasted_days_conditions = [
+                forecast.get("day") for forecast in forecast_lookup_list
+            ]
+            max_temperatures = []
+            min_temperatures = []
+            average_temperatures = []
+
+            for forecasted_day_condition in forecasted_days_conditions:
+                max_temperatures.append(forecasted_day_condition.get("maxtemp_c"))
+                min_temperatures.append(forecasted_day_condition.get("mintemp_c"))
+                average_temperatures.append(forecasted_day_condition.get("avgtemp_c"))
 
             forecast_stats = {
-                "maximum": 20,
-                "minimum": 204,
-                "average": 3020,
+                "maximum": max(max_temperatures),
+                "minimum": min(min_temperatures),
+                "average": round(mean(average_temperatures),2),
                 "median": 21,
             }
             return Response(forecast_stats, status=status.HTTP_200_OK)
