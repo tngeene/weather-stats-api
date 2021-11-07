@@ -91,7 +91,7 @@ For example, `api/locations/hogwarts/?days=3`, returns
 
 For the API to work, you need to provide the number of days to fetch data from the API.
 This is set as a request url parameter.
-In case it's not provided, expect a response `406` (not acceptable), with the following response message:
+In case it's not passed as a query parameter, expect a response `406` (not acceptable), with the following response message:
 
     {
         "detail": "Provide number of days to look up forecast"
@@ -102,6 +102,22 @@ the following error:
 
     {
         "detail": "Number of days to look up must be between 0 and 10"
+    }
+
+When the days provided is empty.
+Example request is `api/locations/lusaka/?days=`
+The status code is also `406` with the following error
+
+    {
+        "detail": "Number of days to lookup cannot be an empty value."
+    }
+
+When the days provided is a string.
+Example request is `api/locations/lusaka/?days=two`
+The status code is also `406` with the following error;
+
+    {
+        "detail": "Days provided must be a valid integer."
     }
 
 ### Testing
