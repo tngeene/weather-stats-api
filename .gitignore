@@ -1,5 +1,6 @@
 *.code-workspace
 *.DS_Store
+*.log
 .env
 .idea
 *.save
@@ -9,3 +10,4 @@ venv
 __pycache__/
 .py[cod]
 media/
+gunicorn/
