@@ -1,0 +1,5 @@
+172.18.0.3 - - [07/Nov/2021:15:46:08 +0300] "GET / HTTP/1.1" 404 2220 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36"
+172.18.0.3 - - [07/Nov/2021:15:46:09 +0300] "GET /favicon.ico HTTP/1.1" 404 2271 "http://localhost:8000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36"
+172.18.0.3 - - [07/Nov/2021:15:46:28 +0300] "GET /api/nairobi/days=2 HTTP/1.1" 404 2294 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36"
+172.18.0.3 - - [07/Nov/2021:15:46:39 +0300] "GET /api/locations/nairobi/days=2 HTTP/1.1" 404 2398 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36"
+172.18.0.3 - - [07/Nov/2021:15:46:53 +0300] "GET /api/locations/nairobi/?days=2 HTTP/1.1" 200 5487 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36"

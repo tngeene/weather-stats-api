@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+  web:
+      build: .
+      container_name: weather_api_django
+      restart: unless-stopped
+      volumes:
+      - .:/code
+      - ./gunicorn/logs:/gunicorn/logs
+      - static:/code/static
+      - media:/code/media
+
+  nginx:
+      restart: always
+      build: ./nginx/
+      container_name: weather_api_web_server
+      volumes:
+        - ./nginx/:/etc/nginx/conf.d
+        - ./nginx/logs/:/code/logs
+        - static:/code/static
+        - media:/code/media
+      ports:
+        - "127.0.0.1:8000:80"
+      depends_on:
+        - web
+      links:
+        - web
+
+volumes:
+  media:
+  static:

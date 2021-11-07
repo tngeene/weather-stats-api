@@ -1,0 +1,2 @@
+2021/11/07 12:44:13 [error] 22#22: *2 connect() failed (113: No route to host) while connecting to upstream, client: 172.18.0.1, server: 127.0.0.1, request: "GET / HTTP/1.1", upstream: "http://172.18.0.2:8000/", host: "localhost:8000"
+2021/11/07 12:44:16 [error] 22#22: *2 connect() failed (113: No route to host) while connecting to upstream, client: 172.18.0.1, server: 127.0.0.1, request: "GET /favicon.ico HTTP/1.1", upstream: "http://172.18.0.2:8000/favicon.ico", host: "localhost:8000", referrer: "http://localhost:8000/"
