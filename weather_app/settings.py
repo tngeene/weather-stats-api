@@ -145,4 +145,5 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "DEFAULT_RENDERER_CLASSES": DEFAULT_RENDERER_CLASSES,
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
