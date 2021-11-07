@@ -16,7 +16,9 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG", cast=bool, default=True)
 PRODUCTION = env("PRODUCTION", cast=bool, default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'weather-api.tngeene.com',
+    ]
 
 # weather API configs
 BASE_WEATHER_API_URL = env("BASE_WEATHER_API_URL")
