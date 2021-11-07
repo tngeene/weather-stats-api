@@ -14,10 +14,11 @@ env.read_env(env_file)
 SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = env("DEBUG", cast=bool, default=True)
-PRODUCTION = env("PRODUCTION", cast=bool, default=False)
 
 ALLOWED_HOSTS = [
     'weather-api.tngeene.com',
+    '127.0.0.1',
+    'localhost',
     ]
 
 # weather API configs
@@ -134,8 +135,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DEFAULT_RENDERER_CLASSES = ("rest_framework.renderers.JSONRenderer",)
 
-# hide browsable API in production
-if not PRODUCTION:
+# hide browsable API when debug mode is False
+if DEBUG:
     DEFAULT_RENDERER_CLASSES = DEFAULT_RENDERER_CLASSES + (
         "rest_framework.renderers.BrowsableAPIRenderer",
     )

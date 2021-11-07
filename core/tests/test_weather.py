@@ -8,10 +8,11 @@ base_api_url = "core:weather_lookup_api:stats"
 
 class WeatherForecastLookupTests(APITestCase):
     def test_valid_request(self):
-        """A valid request made"""
+        # A valid request made
+
         url = build_reverse_url(
             base_api_url,
-            kwargs={"city": "Mombasa"},
+            kwargs={"city": "mombasa"},
             params={"days": 6},
         )
         response = self.client.get(url)
@@ -20,8 +21,10 @@ class WeatherForecastLookupTests(APITestCase):
         self.assertEqual(list(response.data), expected_keys)
 
     def test_days_below_range(self):
-        """check the results of a scenario
-        where a day provided is below 1"""
+        """
+        check the results of a scenario
+        where a day provided is below 1
+        """
         url = build_reverse_url(
             base_api_url,
             kwargs={"city": "Lusaka"},
@@ -35,8 +38,10 @@ class WeatherForecastLookupTests(APITestCase):
         )
 
     def test_days_above_range(self):
-        """check the results of a scenario
-        where the days provided is above 10"""
+        """
+        check the results of a scenario
+        where the days provided is above 10
+        """
         url = build_reverse_url(
             base_api_url,
             kwargs={"city": "London"},
@@ -50,7 +55,7 @@ class WeatherForecastLookupTests(APITestCase):
         )
 
     def test_days_param_in_url(self):
-        """Check if the 'days' query param has been passed"""
+        # Check if the 'days' query param has been passed
         url = build_reverse_url(base_api_url, kwargs={"city": "Durban"})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_406_NOT_ACCEPTABLE)
@@ -59,8 +64,33 @@ class WeatherForecastLookupTests(APITestCase):
             {"detail": "Provide number of days to look up forecast"},
         )
 
+    def test_days_param_value_in_url(self):
+        # Check if the 'days' query param has is not empty
+        url = build_reverse_url(
+            base_api_url, kwargs={"city": "kigali"}, params={"days": ""}
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_406_NOT_ACCEPTABLE)
+        self.assertEqual(
+            response.data,
+            {"detail": "Number of days to lookup cannot be an empty value."},
+        )
+    
+    def test_days_is_an_integer(self):
+        # Check if the 'days' query param has is an integer
+        url = build_reverse_url(
+            base_api_url, kwargs={"city": "cairo"}, params={"days": "two"}
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_406_NOT_ACCEPTABLE)
+        self.assertEqual(
+            response.data,
+            {"detail": "Days provided must be a valid integer."},
+        )
+
+
     def test_valid_city_lookup(self):
-        """Test response when a non existent city is looked up"""
+        # Test response when a non existent city is looked up
         url = build_reverse_url(
             base_api_url, kwargs={"city": "hogwarts"}, params={"days": 3}
         )

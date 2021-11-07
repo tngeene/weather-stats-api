@@ -6,8 +6,9 @@ from django.utils.http import urlencode
 
 
 def calculate_median(temperature_list: list) -> Any:
-    """Calculates the median value from an list of values.
-    Alternative way is to use the 'median' function in the 
+    """
+    Calculates the median value from an list of values.
+    Alternative way is to use the 'median' function in the
     python statistics standard library.
     """
     # sort array to arrange in ascending order
@@ -37,8 +38,10 @@ def calculate_median(temperature_list: list) -> Any:
 
 
 def build_url(url, **kwargs):
-    """builds urls with query params by accepting
-    multiple params as key value pairs"""
+    """
+    builds urls with query params by accepting
+    multiple params as key value pairs
+    """
     params = kwargs.pop("params", {})
     built_url = url
     if params:
@@ -47,8 +50,10 @@ def build_url(url, **kwargs):
 
 
 def build_reverse_url(*args, **kwargs):
-    """builds urls with query params by accepting
-    multiple params as key value pairs in reversed urls."""
+    """
+    builds urls with query params by accepting
+    multiple params as key value pairs in reversed urls.
+    """
     params = kwargs.pop("params", {})
     built_url = reverse(*args, **kwargs)
     if params:

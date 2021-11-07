@@ -6,7 +6,7 @@ This app returns max, minimum, average and median temperature values of a
 city's weather forecast. Data is provided from the open API
 [weatherapi.com](https://www.weatherapi.com/)
 
-Public Link can be found [here](https://weather-api.tngeene.com/)
+This project has been hosted and is available [here](https://weather-api.tngeene.com/)
 
 1. [Requirements](#requirements)
 2. [Setup](#setup)
@@ -43,7 +43,7 @@ Public Link can be found [here](https://weather-api.tngeene.com/)
 10. For details of how to get started with django, check out [this link](https://www.djangoproject.com/start/)
 11. In order to work with a virtual environment, check out [this link](https://tutorial.djangogirls.org/en/installation/#pythonanywhere)
 
-In case you have docker installed, simply run
+In case you have docker installed, run
 
     docker compose up --build -d
 
