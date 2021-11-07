@@ -35,7 +35,7 @@ class WeatherStatisticsAPIView(APIView):
                 return forecast_data_stats
             else:
                 raise NotAcceptable(
-                    _("Number of days to look up must be between 1 and 10")
+                    _("Number of days to look up must be between 0 and 10")
                 )
         else:
             raise NotAcceptable(_("Provide number of days to look up forecast"))

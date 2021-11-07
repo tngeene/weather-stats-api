@@ -31,7 +31,7 @@ class WeatherForecastLookupTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_406_NOT_ACCEPTABLE)
         self.assertEqual(
             response.data,
-            {"detail": "Number of days to look up must be between 1 and 10"},
+            {"detail": "Number of days to look up must be between 0 and 10"},
         )
 
     def test_days_above_range(self):
@@ -46,7 +46,7 @@ class WeatherForecastLookupTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_406_NOT_ACCEPTABLE)
         self.assertEqual(
             response.data,
-            {"detail": "Number of days to look up must be between 1 and 10"},
+            {"detail": "Number of days to look up must be between 0 and 10"},
         )
 
     def test_days_param_in_url(self):

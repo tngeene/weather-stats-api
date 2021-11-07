@@ -18,9 +18,6 @@ def calculate_median(temperature_list: list) -> Any:
     if len(temperature_list) == 0:
         raise EmptyResultSet("no median for empty data")
     elif len(temperature_list) % 2 == 0:
-        print(
-            len(temperature_list),
-        )
         # get middle index
         middle_index = len(temperature_list) // 2
         # to get the median, we get the no. in the middle and
