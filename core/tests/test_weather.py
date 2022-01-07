@@ -92,7 +92,7 @@ class WeatherForecastLookupTests(APITestCase):
     def test_valid_city_lookup(self):
         # Test response when a non existent city is looked up
         url = build_reverse_url(
-            base_api_url, kwargs={"city": "hogwarts"}, params={"days": 3}
+            base_api_url, kwargs={"city": "nocity"}, params={"days": 3}
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

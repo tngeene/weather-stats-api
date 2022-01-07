@@ -106,7 +106,7 @@ the following error:
 
 When the days provided is empty.
 Example request is `api/locations/lusaka/?days=`
-The status code is also `406` with the following error
+The status code is also `406` with the following error message;
 
     {
         "detail": "Number of days to lookup cannot be an empty value."
@@ -114,7 +114,7 @@ The status code is also `406` with the following error
 
 When the days provided is a string.
 Example request is `api/locations/lusaka/?days=two`
-The status code is also `406` with the following error;
+The status code is also `406` with the following error message;
 
     {
         "detail": "Days provided must be a valid integer."
