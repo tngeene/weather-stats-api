@@ -13,7 +13,13 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.7, 3.8, 3.9]
-
+    env:
+        DEBUG: ${{ secrets.DEBUG }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DB_ENGINE: ${{ secrets.DB_ENGINE }}
+        DB_NAME: ${{ secrets.DB_NAME }}
+        BASE_WEATHER_API_URL: ${{ secrets.BASE_WEATHER_API_URL }}
+        WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -27,12 +33,5 @@ jobs:
       - name: Run Tests
         run: |
           python manage.py test core.tests
-        env:
-          DEBUG: ${{ secrets.DEBUG }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DB_ENGINE: ${{ secrets.DB_ENGINE }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          BASE_WEATHER_API_URL: ${{ secrets.BASE_WEATHER_API_URL }}
-          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
-        # with:
-        #   envs: SECRET_KEY, DEBUG, DB_ENGINE, DB_NAME, BASE_WEATHER_API_URL, WEATHER_API_KEY
+        with:
+          envs: SECRET_KEY, DEBUG, DB_ENGINE, DB_NAME, BASE_WEATHER_API_URL, WEATHER_API_KEY
