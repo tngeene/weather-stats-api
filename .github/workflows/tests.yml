@@ -7,12 +7,12 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.8, 3.9]
 
     steps:
       - uses: actions/checkout@v2
@@ -25,14 +25,32 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run Tests
+        env:
+          DEBUG: ${{secrets.DEBUG}}
+          SECRET_KEY: ${{secrets.SECRET_KEY}}
+          DB_ENGINE: ${{secrets.DB_ENGINE}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          BASE_WEATHER_API_URL: ${{secrets.BASE_WEATHER_API_URL}}
+          WEATHER_API_KEY: ${{secrets.WEATHER_API_KEY}}
         run: |
           python manage.py test core.tests
+      
+    deploy:
+      runs-on: ubuntu-latest
+      steps:
+        name: Deploy to server
+        uses: appleboy/ssh-action@master
         env:
-          DEBUG: ${{ secrets.DEBUG }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DB_ENGINE: ${{ secrets.DB_ENGINE }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          BASE_WEATHER_API_URL: ${{ secrets.BASE_WEATHER_API_URL }}
-          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
-        # with:
-        #   envs: SECRET_KEY, DEBUG, DB_ENGINE, DB_NAME, BASE_WEATHER_API_URL, WEATHER_API_KEY
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          host: ${{ secrets.LIVE_SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          server_private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
+          envs: GITHUB_USERNAME, GITHUB_TOKEN
+          script: |
+            cd ${{ secrets.PROJECT_PATH }} && git pull
+            docker-compose down 
+            docker-compose up --build -d
+
+        
