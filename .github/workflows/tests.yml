@@ -35,22 +35,22 @@ jobs:
         run: |
           python manage.py test core.tests
       
-    deploy:
-      runs-on: ubuntu-latest
-      steps:
-        name: Deploy to server
-        uses: appleboy/ssh-action@master
-        env:
-          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          host: ${{ secrets.LIVE_SERVER_IP }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          server_private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          envs: GITHUB_USERNAME, GITHUB_TOKEN
-          script: |
-            cd ${{ secrets.PROJECT_PATH }} && git pull
-            docker-compose down 
-            docker-compose up --build -d
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      name: Deploy to server
+      uses: appleboy/ssh-action@master
+      env:
+        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        host: ${{ secrets.LIVE_SERVER_IP }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        server_private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
+        envs: GITHUB_USERNAME, GITHUB_TOKEN
+        script: |
+          cd ${{ secrets.PROJECT_PATH }} && git pull
+          docker-compose down 
+          docker-compose up --build -d
 
         
