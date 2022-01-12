@@ -57,7 +57,7 @@ jobs:
           host: ${{ secrets.LIVE_SERVER_IP }}
           port: ${{ secrets.DEPLOY_PORT }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_PRIVATE_KEY }}
+          password: ${{ secrets.SERVER_USER_PASSWORD }}
           envs: GITHUB_USERNAME, GITHUB_TOKEN
           script: |
             cd ${{ secrets.PROJECT_PATH }} && git pull ${{secrets.REPO_URL}}
