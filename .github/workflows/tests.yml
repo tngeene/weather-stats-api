@@ -35,7 +35,7 @@ jobs:
       - name: Run Tests
         env:
           DEBUG: ${{ secrets.DEBUG }}
-          SECRET_KEY: ${{ secrets.SECRET }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DB_ENGINE: ${{ secrets.DB_ENGINE }}
           DB_NAME: ${{ secrets.DB_NAME }}
           BASE_WEATHER_API_URL: ${{ secrets.BASE_WEATHER_API_URL }}
