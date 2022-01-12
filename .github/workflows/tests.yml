@@ -60,6 +60,7 @@ jobs:
           password: ${{ secrets.SERVER_USER_PASSWORD }}
           envs: GITHUB_USERNAME, GITHUB_TOKEN
           script: |
-            cd ${{ secrets.PROJECT_PATH }} && git pull ${{secrets.REPO_URL}}
-            docker-compose down 
-            docker-compose up --build -d
+            cd ${{ secrets.PROJECT_PATH }}
+            ls
+            # docker-compose down 
+            # docker-compose up --build -d
