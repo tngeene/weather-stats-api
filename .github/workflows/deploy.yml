@@ -1,9 +1,7 @@
-name: Django Deploy CI
-
+name: Django Deploy CD
 on:
   push:
     branches: [main]
-
 jobs:
   deploy:
     runs-on: ubuntu-18.04
